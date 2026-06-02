@@ -19,7 +19,7 @@ def main() -> None:
             elif opcion == "2":
                 inventario_ctrl.ejecutar()
             elif opcion == "3":
-                print("\n  ¡Hasta la próxima aventura! ⚔\n")
+                print("\n  ¡Hasta la próxima aventura!\n")
                 break
             else:
                 view.mostrar_advertencia("Opción no válida.")

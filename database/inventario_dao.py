@@ -6,8 +6,6 @@ class InventarioDAO:
     def __init__(self) -> None:
         self._conexion = Conexion().obtener_conexion()
 
-    # ── CREATE ─────────────────────────────────────────────────────
-
     def agregar_item(self, id_personaje: int,
                      nombre_item: str, bonus: float) -> int:
         sql = """

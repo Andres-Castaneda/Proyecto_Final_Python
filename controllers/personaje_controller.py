@@ -4,8 +4,6 @@ from models.arquero import Arquero
 from database.personaje_dao import PersonajeDAO
 from views.personaje_view import PersonajeView
 
-
-# Factory: mapea el string de clase al constructor correcto
 _FABRICAS = {
     "Guerrero": lambda d: Guerrero(
         d["nombre"], d["nivel"], d["ataque"], d["defensa"], d["vida"]
@@ -20,10 +18,6 @@ _FABRICAS = {
 
 
 class PersonajeController:
-    """
-    Orquesta el flujo entre PersonajeView y PersonajeDAO.
-    No imprime ni ejecuta SQL directamente — delega a cada capa.
-    """
 
     def __init__(self) -> None:
         self._dao = PersonajeDAO()
@@ -57,7 +51,6 @@ class PersonajeController:
             else:
                 self._view.mostrar_advertencia("Opción no válida.")
 
-    # ── CREATE ─────────────────────────────────────────────────────
 
     def _crear(self) -> None:
         datos = self._view.pedir_datos_nuevo_personaje()
@@ -75,9 +68,6 @@ class PersonajeController:
         self._view.mostrar_exito(
             f"Personaje '{datos['nombre']}' creado con ID {nuevo_id}."
         )
-
-    # ── READ ───────────────────────────────────────────────────────
-
     def _listar(self) -> None:
         personajes = self._dao.obtener_todos()
         self._view.mostrar_lista_personajes(personajes)
@@ -94,12 +84,10 @@ class PersonajeController:
 
         self._view.mostrar_personaje(personaje)
 
-    # ── UPDATE ─────────────────────────────────────────────────────
 
     def _actualizar(self) -> None:
         id_p = self._view.pedir_id("ID del personaje a actualizar: ")
 
-        # Verificar que existe antes de pedir datos
         if not self._dao.obtener_por_id(id_p):
             self._view.mostrar_advertencia(
                 f"No existe personaje con ID {id_p}."
@@ -119,8 +107,6 @@ class PersonajeController:
             self._view.mostrar_exito("Personaje actualizado correctamente.")
         else:
             self._view.mostrar_error("No se pudo actualizar el personaje.")
-
-    # ── DELETE ─────────────────────────────────────────────────────
 
     def _eliminar(self) -> None:
         id_p = self._view.pedir_id("ID del personaje a eliminar: ")
@@ -146,7 +132,6 @@ class PersonajeController:
         else:
             self._view.mostrar_error("No se pudo eliminar el personaje.")
 
-    # ── HABILIDAD ──────────────────────────────────────────────────
 
     def _usar_habilidad(self) -> None:
         id_p = self._view.pedir_id("ID del personaje que usará su habilidad: ")

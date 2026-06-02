@@ -7,7 +7,7 @@ class InventarioController:
 
     def __init__(self) -> None:
         self._dao = InventarioDAO()
-        self._dao_personaje = PersonajeDAO()   # Para validar que el personaje existe
+        self._dao_personaje = PersonajeDAO()
         self._view = InventarioView()
 
     def ejecutar(self) -> None:
@@ -37,8 +37,6 @@ class InventarioController:
             else:
                 self._view.mostrar_error("Opción no válida.")
 
-    # ── CREATE ─────────────────────────────────────────────────────
-
     def _agregar_item(self) -> None:
         id_p = self._view.pedir_id_personaje()
 
@@ -56,8 +54,6 @@ class InventarioController:
             f"Ítem '{datos['nombre_item']}' agregado con ID {nuevo_id}."
         )
 
-    # ── READ ───────────────────────────────────────────────────────
-
     def _ver_inventario_personaje(self) -> None:
         id_p = self._view.pedir_id_personaje()
         personaje = self._dao_personaje.obtener_por_id(id_p)
@@ -70,7 +66,6 @@ class InventarioController:
 
         items = self._dao.obtener_por_personaje(id_p)
 
-        # Agrega el nombre del dueño a cada ítem para mostrarlo
         for item in items:
             item["nombrePersonaje"] = personaje.nombre
 
@@ -82,7 +77,6 @@ class InventarioController:
         items = self._dao.obtener_todos()
         self._view.mostrar_inventario(items, "INVENTARIO COMPLETO")
 
-    # ── UPDATE ─────────────────────────────────────────────────────
 
     def _actualizar_item(self) -> None:
         id_item = self._view.pedir_id_item()
@@ -97,8 +91,6 @@ class InventarioController:
             self._view.mostrar_error(
                 f"No existe ítem con ID {id_item}."
             )
-
-    # ── DELETE ─────────────────────────────────────────────────────
 
     def _eliminar_item(self) -> None:
         id_item = self._view.pedir_id_item()

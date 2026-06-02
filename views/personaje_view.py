@@ -1,24 +1,16 @@
 class PersonajeView:
-    """
-    Gestiona toda la interacción con el usuario en consola.
-    No conoce la BD ni los modelos — solo imprime y pide datos.
-    """
 
-    # ── Menú principal ─────────────────────────────────────────────
 
     def mostrar_menu_principal(self) -> None:
-        print("\n" + "=" * 50)
-        print("        ⚔  GESTOR DE PERSONAJES RPG  ⚔")
-        print("=" * 50)
-        print("  1. Gestionar Personajes")
-        print("  2. Gestionar Inventario")
+        print("\n")
+        print("------Juego de Personajes RPG - Menú Principal------")
+        print("  1. Personajes")
+        print("  2. Inventario")
         print("  3. Salir")
-        print("=" * 50)
 
     def mostrar_menu_personajes(self) -> None:
-        print("\n" + "-" * 50)
-        print("           MENÚ DE PERSONAJES")
-        print("-" * 50)
+        print("\n")
+        print("------MENÚ DE PERSONAJES------")
         print("  1. Crear personaje")
         print("  2. Listar todos los personajes")
         print("  3. Buscar personaje por ID")
@@ -26,16 +18,12 @@ class PersonajeView:
         print("  5. Eliminar personaje")
         print("  6. Usar habilidad")
         print("  7. Volver al menú principal")
-        print("-" * 50)
 
     def pedir_opcion(self, mensaje: str = "Seleccione una opción: ") -> str:
         try:
             return input(f"\n  {mensaje}").strip()
         except EOFError:
-            # Evita crash si el input recibe fin de archivo
             return
-
-    # ── Formularios de entrada ─────────────────────────────────────
 
     def pedir_datos_nuevo_personaje(self) -> dict:
         print("\n  -- Tipos disponibles: Guerrero | Mago | Arquero --")
@@ -61,8 +49,6 @@ class PersonajeView:
             "vida":    float(input("  Nueva vida     : ")),
         }
 
-    # ── Visualización de personajes ────────────────────────────────
-
     def mostrar_lista_personajes(self, personajes: list) -> None:
         if not personajes:
             print("\n  Sin personajes registrados.")
@@ -85,8 +71,6 @@ class PersonajeView:
 
     def mostrar_habilidad(self, resultado: str) -> None:
         print(f"\n  {resultado}")
-
-    # ── Mensajes de feedback ───────────────────────────────────────
 
     def mostrar_exito(self, mensaje: str) -> None:
         print(f"\n  ✔  {mensaje}")

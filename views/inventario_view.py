@@ -1,22 +1,18 @@
 class InventarioView:
-    """Gestiona la interacción de consola para el inventario."""
 
     def mostrar_menu_inventario(self) -> None:
-        print("\n" + "-" * 50)
-        print("           MENÚ DE INVENTARIO")
-        print("-" * 50)
+        print("\n")
+        print("------MENÚ DE INVENTARIO------")
         print("  1. Agregar ítem a personaje")
         print("  2. Ver inventario de un personaje")
         print("  3. Ver todo el inventario")
         print("  4. Actualizar ítem")
         print("  5. Eliminar ítem")
         print("  6. Volver al menú principal")
-        print("-" * 50)
 
     def pedir_opcion(self, mensaje: str = "Seleccione una opción: ") -> str:
         return input(f"\n  {mensaje}").strip()
 
-    # ── Formularios de entrada ─────────────────────────────────────
 
     def pedir_datos_item(self) -> dict:
         return {
@@ -36,7 +32,6 @@ class InventarioView:
             "bonus":       float(input("  Nuevo bonus           : ")),
         }
 
-    # ── Visualización ──────────────────────────────────────────────
 
     def mostrar_inventario(self, items: list, titulo: str = "INVENTARIO") -> None:
         if not items:
@@ -55,8 +50,6 @@ class InventarioView:
                 f"{item['bonus']:<10.1f} {propietario}"
             )
         print(f"  {'=' * 45}")
-
-    # ── Mensajes de feedback ───────────────────────────────────────
 
     def mostrar_exito(self, mensaje: str) -> None:
         print(f"\n  ✔  {mensaje}")

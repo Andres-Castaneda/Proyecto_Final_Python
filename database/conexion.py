@@ -27,4 +27,3 @@ class Conexion:
     def cerrar(self) -> None:
         if self._conexion and self._conexion.is_connected():
             self._conexion.close()
-            print("  Conexión a MySQL cerrada.")

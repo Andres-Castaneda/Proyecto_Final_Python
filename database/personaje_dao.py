@@ -43,10 +43,7 @@ class PersonajeDAO:
 
 
     def obtener_todos(self) -> list[Personaje]:
-        """
-        Retorna todos los personajes como objetos Python
-        (Guerrero, Mago o Arquero según su clase).
-        """
+
         cursor = self._conexion.cursor(dictionary=True)  # Resultados como dict
         cursor.execute("SELECT * FROM Personaje")
         filas = cursor.fetchall()
@@ -73,7 +70,7 @@ class PersonajeDAO:
         cursor = self._conexion.cursor()
         cursor.execute(sql, (nivel, ataque, defensa, vida, id_personaje))
         self._conexion.commit()
-        return cursor.rowcount > 0  # rowcount equivale a executeUpdate() en Java
+        return cursor.rowcount > 0
 
 
     def eliminar(self, id_personaje: int) -> bool:
